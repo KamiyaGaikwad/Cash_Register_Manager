@@ -6,13 +6,17 @@ const noOfNotes = document.querySelectorAll(".no-of-notes");
 const nextButton = document.querySelector("#next-button");
 const currencyTable = document.querySelector("#currency-table");
 const cashGivenLabel = document.querySelector("#cash-given-label");
-
 const availableNotes = [2000, 500, 100, 20, 10, 5, 1];
+
+
 hideCashGiven();
 hideCurrencyTable();
 nextButton.addEventListener("click", function showCashGivenAndCheckButton(){
-    
-    if (isNaN(billAmount.value)){
+    hideMessage();
+    if(billAmount.value == ""){
+        showMessage("Please Enter Bill Amount in Input Box");
+    }
+    else if (isNaN(billAmount.value)){
         showMessage("Enter bill amount in number please");
         
     }
@@ -29,7 +33,10 @@ checkButton.addEventListener("click", function validateBillAndCashAmount(){
     }
     else{
         if (billAmount.value >0){
-            if(isNaN(cashGiven.value)){
+            if(cashGiven.value == ""){
+                showMessage("Please Enter Cash Given in Input Box");
+            }
+            else if(isNaN(cashGiven.value)){
                 showMessage("Enter cash given in number please")}
             else{
             if (Number(cashGiven.value) > Number(billAmount.value)) {
