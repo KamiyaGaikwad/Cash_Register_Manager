@@ -11,30 +11,45 @@ const availableNotes = [2000, 500, 100, 20, 10, 5, 1];
 hideCashGiven();
 hideCurrencyTable();
 nextButton.addEventListener("click", function showCashGivenAndCheckButton(){
-    showCashGiven();
+    
+    if (isNaN(billAmount.value)){
+        showMessage("Enter bill amount in number please");
+        
+    }
+    else{
+        hideNextButton();
+        showCashGiven();
+    }
 })
 checkButton.addEventListener("click", function validateBillAndCashAmount(){
     hideMessage();
-    console.log(isNaN(billAmount.value))
     if (isNaN(billAmount.value)){
         showMessage("Enter bill amount in number please");
         
     }
     else{
         if (billAmount.value >0){
-            if (cashGiven.value >= billAmount.value) {
+            if(isNaN(cashGiven.value)){
+                showMessage("Enter cash given in number please")}
+            else{
+            if (Number(cashGiven.value) > Number(billAmount.value)) {
                 const amountToBeReturned = cashGiven.value - billAmount.value;
                 calculateChange(amountToBeReturned);
                 showCurrencyTable();
-            }else {
+            } else if(Number(cashGiven.value) == Number(billAmount.value)) {
+                showMessage("No amount should be returned")
+            }
+            else {
                showMessage("The cash provided should atleast be equal to the bill amount"); 
             }
-        }else {
+        }}else {
             showMessage("The bill amount should be greater than zero");
     
-            }    
+            }
+    }
+            
     
-}})
+})
 
 function showMessage(messageWrite) {
     message.style.display = "block";
@@ -76,4 +91,8 @@ function showCashGiven(){
 
 function showCurrencyTable() {
     currencyTable.style.display = "block";
+}
+
+function hideNextButton() {
+    nextButton.style.display = "none";
 }
