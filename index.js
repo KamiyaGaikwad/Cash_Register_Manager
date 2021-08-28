@@ -15,9 +15,11 @@ nextButton.addEventListener("click", function showCashGivenAndCheckButton(){
     hideMessage();
     if(billAmount.value == ""){
         showMessage("Please Enter Bill Amount in Input Box");
+        hideCurrencyTable();
     }
     else if (isNaN(billAmount.value)){
         showMessage("Enter bill amount in number please");
+        hideCurrencyTable();
         
     }
     else{
@@ -29,15 +31,19 @@ checkButton.addEventListener("click", function validateBillAndCashAmount(){
     hideMessage();
     if (isNaN(billAmount.value)){
         showMessage("Enter bill amount in number please");
+        hideCurrencyTable();
         
     }
     else{
         if (billAmount.value >0){
             if(cashGiven.value == ""){
                 showMessage("Please Enter Cash Given in Input Box");
+                hideCurrencyTable();
             }
             else if(isNaN(cashGiven.value)){
-                showMessage("Enter cash given in number please")}
+                showMessage("Enter cash given in number please")
+                hideCurrencyTable();
+            }
             else{
             if (Number(cashGiven.value) > Number(billAmount.value)) {
                 const amountToBeReturned = cashGiven.value - billAmount.value;
@@ -45,13 +51,15 @@ checkButton.addEventListener("click", function validateBillAndCashAmount(){
                 showCurrencyTable();
             } else if(Number(cashGiven.value) == Number(billAmount.value)) {
                 showMessage("No amount should be returned")
+                hideCurrencyTable();
             }
             else {
                showMessage("The cash provided should atleast be equal to the bill amount"); 
+               hideCurrencyTable();
             }
         }}else {
             showMessage("The bill amount should be greater than zero");
-    
+            hideCurrencyTable();
             }
     }
             
